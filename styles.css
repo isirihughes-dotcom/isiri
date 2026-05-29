@@ -16,18 +16,20 @@ body {
 /* Splash Screen */
 #splash {
     position: fixed;
-    top: -1px;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     width: 100vw;
-    height: calc(100vh + 1px);
-    height: calc(100dvh + 1px);
+    height: 100vh;
+    height: 100dvh;
     z-index: 999;
     background-image: url('Assets/intro.jpg');
     background-size: 108%;
     background-position: center calc(50% + 4cm + 0.5in);
     background-repeat: no-repeat;
+    background-color: #fff;
+    padding-top: env(safe-area-inset-top);
     display: flex;
     align-items: center;
     justify-content: center;
