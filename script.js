@@ -10,9 +10,14 @@ document.addEventListener('DOMContentLoaded', function() {
 function setupSplash() {
     const splash = document.getElementById('splash');
     if (!splash) return;
-    splash.addEventListener('click', function() {
+    function dismissSplash() {
         splash.style.display = 'none';
         navigateTo('printmaking');
+    }
+    splash.addEventListener('click', dismissSplash);
+    splash.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        dismissSplash();
     });
 }
 
