@@ -498,8 +498,16 @@ body {
     }
 
     .item-image-wrapper {
-        height: 80vh;
+        height: auto;
         margin-bottom: 0.5rem;
+    }
+
+    .item-image-wrapper img,
+    .item-image-wrapper video {
+        width: 100%;
+        height: auto;
+        max-height: 85vh;
+        object-fit: contain;
     }
 
     /* Paired images — stack vertically on mobile */
@@ -514,19 +522,24 @@ body {
     }
 
     .gallery-item--paired .item-image-wrapper {
-        height: 70vh;
+        height: auto;
         width: 100%;
     }
 
     .gallery-item--paired .item-image-wrapper img,
     .gallery-item--paired .item-image-wrapper video {
+        width: 100%;
+        height: auto;
+        max-height: 80vh;
         object-fit: contain;
     }
 
     .paired-col--contain .item-image-wrapper img,
     .paired-col--contain .item-image-wrapper video {
-        height: 60vh;
+        height: auto;
+        max-height: 70vh;
         width: auto;
+        max-width: 100%;
     }
 }
 
