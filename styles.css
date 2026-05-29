@@ -565,4 +565,8 @@ body {
     .logo-img {
         height: 28px;
     }
+
+    .item-meta {
+        font-size: 0.7rem;
+    }
 }
