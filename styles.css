@@ -4,7 +4,11 @@
     box-sizing: border-box;
 }
 
-html, body {
+html {
+    width: 100%;
+}
+
+body {
     overflow-x: hidden;
     width: 100%;
 }
@@ -12,10 +16,13 @@ html, body {
 /* Splash Screen */
 #splash {
     position: fixed;
-    inset: 0;
+    top: -1px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     width: 100vw;
-    height: 100vh;
-    height: 100dvh;
+    height: calc(100vh + 1px);
+    height: calc(100dvh + 1px);
     z-index: 999;
     background-image: url('Assets/intro.jpg');
     background-size: 108%;
@@ -35,9 +42,10 @@ html, body {
 }
 
 .splash-logo {
-    height: 85px;
+    height: auto;
     width: auto;
-    max-width: 85vw;
+    max-height: 85px;
+    max-width: 75vw;
     mix-blend-mode: multiply;
 }
 
