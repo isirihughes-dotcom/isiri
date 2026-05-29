@@ -456,6 +456,10 @@ body {
         background-size: cover;
     }
 
+    .splash-enter {
+        bottom: calc(2rem + 1in);
+    }
+
     /* Nav — stack logo above links */
     .nav-container {
         flex-direction: column;
