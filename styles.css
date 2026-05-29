@@ -524,6 +524,11 @@ body {
         width: 100%;
     }
 
+    /* Remove inline crop on mobile so images stay centred */
+    .paired-col .item-image-wrapper {
+        clip-path: none !important;
+    }
+
     .gallery-item--paired .item-image-wrapper {
         height: auto;
         width: 100%;
