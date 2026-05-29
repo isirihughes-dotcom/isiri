@@ -190,14 +190,10 @@ body {
     align-items: center;
     justify-content: center;
     padding: 0.25rem;
-    border-bottom: 1px solid #ddd;
     scroll-snap-align: start;
     scroll-snap-stop: always;
 }
 
-.gallery-item:last-child {
-    border-bottom: none;
-}
 
 .gallery-item--paired {
     flex-direction: row;
