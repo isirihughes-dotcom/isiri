@@ -32,6 +32,7 @@
 .splash-logo {
     height: 85px;
     width: auto;
+    max-width: 85vw;
     mix-blend-mode: multiply;
 }
 
@@ -479,7 +480,7 @@ body {
     }
 
     .item-image-wrapper {
-        height: 65vw;
+        height: 80vh;
         margin-bottom: 0.5rem;
     }
 
@@ -490,12 +491,19 @@ body {
     }
 
     .gallery-item--paired .item-image-wrapper {
-        height: 65vw;
+        height: 70vh;
+        width: 100%;
+    }
+
+    .gallery-item--paired .item-image-wrapper img,
+    .gallery-item--paired .item-image-wrapper video {
+        object-fit: contain;
     }
 
     .paired-col--contain .item-image-wrapper img,
     .paired-col--contain .item-image-wrapper video {
-        height: 50vw;
+        height: 60vh;
+        width: auto;
     }
 }
 
