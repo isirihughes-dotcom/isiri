@@ -516,7 +516,7 @@ body {
     /* Paired images — stack vertically on mobile */
     .gallery-item--paired {
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0;
         align-items: center;
     }
 
@@ -527,6 +527,12 @@ body {
     /* Remove inline crop on mobile so images stay centred */
     .paired-col .item-image-wrapper {
         clip-path: none !important;
+    }
+
+    /* Remove portrait aspect-ratio constraint when stacked */
+    .gallery-item--paired .item-image-wrapper--portrait {
+        aspect-ratio: unset;
+        max-height: none;
     }
 
     .gallery-item--paired .item-image-wrapper {
