@@ -457,7 +457,7 @@ body {
     }
 
     .splash-enter {
-        bottom: calc(2rem + 1in);
+        bottom: calc(2rem + 2in);
     }
 
     /* Nav — stack logo above links */
