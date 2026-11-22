@@ -37,6 +37,22 @@ function getImageList() {
     return [
         {
             category: 'painting',
+            title: 'Attending (1-13)',
+            year: '2026',
+            medium: 'encaustic and oil pigment on panel, single channel video',
+            images: [
+                { carousel: [
+                    'Assets/image26.jpg',
+                    'Assets/image27.jpg',
+                    'Assets/image28.jpg',
+                    'Assets/image29.jpg',
+                    'Assets/image30.jpg'
+                ], dimensions: 'Installation dimensions 580 x 60 x 2 cm' },
+                { src: 'Assets/video2.mp4', small: true }
+            ]
+        },
+        {
+            category: 'painting',
             title: 'She is paper in the window panes',
             year: '2026',
             medium: 'Oil and airbrush on canvas',
@@ -163,6 +179,15 @@ function generateGalleryFeed(feedId, category) {
 
     images.filter(a => a.category === category).forEach((artwork) => {
         artwork.images.forEach((image, imageIndex) => {
+            if (image.carousel) {
+                const captionParts = [`<em>${artwork.title || 'Untitled'}</em>${artwork.year ? ', ' + artwork.year : ''}`];
+                if (artwork.medium) captionParts.push(artwork.medium);
+                if (image.dimensions) captionParts.push(image.dimensions);
+                const caption = imageIndex === 0 ? captionParts.join(', ') : '';
+                galleryFeed.appendChild(buildCarousel(image.carousel, artwork.title, caption));
+                return;
+            }
+
             if (image.paired) {
                 const galleryItem = document.createElement('div');
                 galleryItem.className = `gallery-item gallery-item--paired${image.contain ? ' gallery-item--contain' : ''}`;
@@ -178,7 +203,7 @@ function generateGalleryFeed(feedId, category) {
             }
 
             const galleryItem = document.createElement('div');
-            galleryItem.className = 'gallery-item';
+            galleryItem.className = `gallery-item${image.small ? ' gallery-item--small' : ''}`;
 
             const showDetails = imageIndex === 0;
             const titlePart = `<em>${artwork.title || 'Untitled'}</em>${artwork.year ? ', ' + artwork.year : ''}`;
@@ -198,9 +223,49 @@ function generateGalleryFeed(feedId, category) {
     });
 }
 
+function buildCarousel(srcs, alt, caption) {
+    const galleryItem = document.createElement('div');
+    galleryItem.className = 'gallery-item gallery-item--carousel';
+    galleryItem.innerHTML = `
+        <div class="carousel">
+            <div class="carousel-track">
+                ${srcs.map(src => `<div class="carousel-slide"><img src="${src}" alt="${alt}" loading="lazy"></div>`).join('')}
+            </div>
+        </div>
+        <div class="carousel-controls">
+            <button class="carousel-btn carousel-btn--prev" aria-label="Previous image">&#8249;</button>
+            <p class="carousel-counter item-meta"></p>
+            <button class="carousel-btn carousel-btn--next" aria-label="Next image">&#8250;</button>
+        </div>
+        ${caption ? `<div class="item-details"><p class="item-meta">${caption}</p></div>` : ''}`;
+
+    const track = galleryItem.querySelector('.carousel-track');
+    const prev = galleryItem.querySelector('.carousel-btn--prev');
+    const next = galleryItem.querySelector('.carousel-btn--next');
+    const counter = galleryItem.querySelector('.carousel-counter');
+
+    const currentIndex = () => Math.round(track.scrollLeft / track.clientWidth);
+    const goTo = i => track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+
+    const update = () => {
+        const i = currentIndex();
+        counter.textContent = `${i + 1} / ${srcs.length}`;
+        prev.disabled = i === 0;
+        next.disabled = i === srcs.length - 1;
+    };
+
+    prev.addEventListener('click', () => goTo(currentIndex() - 1));
+    next.addEventListener('click', () => goTo(currentIndex() + 1));
+    track.addEventListener('scroll', update, { passive: true });
+    update();
+
+    return galleryItem;
+}
+
 function navigateTo(section) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.getElementById(section).classList.add('active');
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     document.querySelectorAll('.nav-link').forEach(l => {
         l.classList.toggle('active', l.getAttribute('data-section') === section);
     });
