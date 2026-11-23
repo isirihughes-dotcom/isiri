@@ -608,7 +608,7 @@ body {
 
     .gallery-item--small .item-image-wrapper {
         height: auto;
-        width: 80%;
+        width: 100%;
     }
 
     /* Paired images — stack vertically on mobile */
